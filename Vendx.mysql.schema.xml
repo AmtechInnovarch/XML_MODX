@@ -1,0 +1,1561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="Vendx" baseClass="xPDOObject" platform="mysql" defaultEngine="InnoDB" version="1.1">
+	<object class="Address" table="address" extends="xPDOSimpleObject">
+		<field key="customer_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="first_name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="last_name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="phone_number" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="street" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="company" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="city" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="postcode" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="country_code" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="province_code" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="province_name" dbtype="varchar" precision="255" phptype="string" null="true" />
+
+		<index alias="IDX_B97FF0589395C3F3" name="IDX_B97FF0589395C3F3" primary="false" unique="false" type="BTREE" >
+			<column key="customer_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="AddressLogEntries" table="address_log_entries" extends="xPDOSimpleObject">
+		<field key="action" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="logged_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="object_id" dbtype="varchar" precision="64" phptype="string" null="true" />
+		<field key="object_class" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="version" dbtype="int" phptype="integer" null="false" />
+		<field key="data" dbtype="longtext" phptype="string" null="false" />
+		<field key="username" dbtype="varchar" precision="255" phptype="string" null="true" />
+	</object>
+
+	
+	<object class="Adjustment" table="adjustment" extends="xPDOSimpleObject">
+		<field key="order_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="order_item_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="order_item_unit_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="type" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="label" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="amount" dbtype="int" phptype="integer" null="false" />
+		<field key="is_neutral" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="is_locked" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="origin_code" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="IDX_ACA6E0F28D9F6D38" name="IDX_ACA6E0F28D9F6D38" primary="false" unique="false" type="BTREE" >
+			<column key="order_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_ACA6E0F2E415FB15" name="IDX_ACA6E0F2E415FB15" primary="false" unique="false" type="BTREE" >
+			<column key="order_item_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_ACA6E0F2F720C233" name="IDX_ACA6E0F2F720C233" primary="false" unique="false" type="BTREE" >
+			<column key="order_item_unit_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="AdminApiAccessToken" table="admin_api_access_token" extends="xPDOSimpleObject">
+		<field key="client_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="user_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="token" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="expires_at" dbtype="int" phptype="integer" null="true" />
+		<field key="scope" dbtype="varchar" precision="255" phptype="string" null="true" />
+
+		<index alias="UNIQ_2AA4915D5F37A13B" name="UNIQ_2AA4915D5F37A13B" primary="false" unique="true" type="BTREE" >
+			<column key="token" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_2AA4915D19EB6921" name="IDX_2AA4915D19EB6921" primary="false" unique="false" type="BTREE" >
+			<column key="client_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_2AA4915DA76ED395" name="IDX_2AA4915DA76ED395" primary="false" unique="false" type="BTREE" >
+			<column key="user_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="AdminApiAuthCode" table="admin_api_auth_code" extends="xPDOSimpleObject">
+		<field key="client_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="user_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="token" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="redirect_uri" dbtype="longtext" phptype="string" null="false" />
+		<field key="expires_at" dbtype="int" phptype="integer" null="true" />
+		<field key="scope" dbtype="varchar" precision="255" phptype="string" null="true" />
+
+		<index alias="UNIQ_E366D8485F37A13B" name="UNIQ_E366D8485F37A13B" primary="false" unique="true" type="BTREE" >
+			<column key="token" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_E366D84819EB6921" name="IDX_E366D84819EB6921" primary="false" unique="false" type="BTREE" >
+			<column key="client_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_E366D848A76ED395" name="IDX_E366D848A76ED395" primary="false" unique="false" type="BTREE" >
+			<column key="user_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="AdminApiClient" table="admin_api_client" extends="xPDOSimpleObject">
+		<field key="random_id" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="redirect_uris" dbtype="longtext" phptype="string" null="false" />
+		<field key="secret" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="allowed_grant_types" dbtype="longtext" phptype="string" null="false" />
+	</object>
+
+	
+	<object class="AdminApiRefreshToken" table="admin_api_refresh_token" extends="xPDOSimpleObject">
+		<field key="client_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="user_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="token" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="expires_at" dbtype="int" phptype="integer" null="true" />
+		<field key="scope" dbtype="varchar" precision="255" phptype="string" null="true" />
+
+		<index alias="UNIQ_9160E3FA5F37A13B" name="UNIQ_9160E3FA5F37A13B" primary="false" unique="true" type="BTREE" >
+			<column key="token" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_9160E3FA19EB6921" name="IDX_9160E3FA19EB6921" primary="false" unique="false" type="BTREE" >
+			<column key="client_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_9160E3FAA76ED395" name="IDX_9160E3FAA76ED395" primary="false" unique="false" type="BTREE" >
+			<column key="user_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="AdminUser" table="admin_user" extends="xPDOSimpleObject">
+		<field key="username" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="username_canonical" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="salt" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="password" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="last_login" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="password_reset_token" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="password_requested_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="email_verification_token" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="verified_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="locked" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="expires_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="credentials_expire_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="roles" dbtype="longtext" phptype="string" null="false" />
+		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="email_canonical" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="first_name" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="last_name" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="locale_code" dbtype="varchar" precision="12" phptype="string" null="false" />
+		<field key="encoder_name" dbtype="varchar" precision="255" phptype="string" null="true" />
+	</object>
+
+	
+	<object class="AvatarImage" table="avatar_image" extends="xPDOSimpleObject">
+		<field key="owner_id" dbtype="int" phptype="integer" null="false" index="unique" />
+		<field key="type" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="path" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="UNIQ_1068A3A97E3C61F9" name="UNIQ_1068A3A97E3C61F9" primary="false" unique="true" type="BTREE" >
+			<column key="owner_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="Channel" table="channel" extends="xPDOSimpleObject">
+		<field key="child_of" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="default_locale_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="base_currency_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="default_tax_zone_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="color" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="description" dbtype="longtext" phptype="string" null="true" />
+		<field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="hostname" dbtype="varchar" precision="255" phptype="string" null="true" index="index" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="theme_name" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="tax_calculation_strategy" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="contact_email" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="skipping_shipping_step_allowed" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="account_verification_required" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="skipping_payment_step_allowed" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="shop_billing_data_id" dbtype="int" phptype="integer" null="true" index="unique" />
+		<field key="menu_taxon_id" dbtype="int" phptype="integer" null="true" index="index" />
+
+		<index alias="UNIQ_16C8119EB5282EDF" name="UNIQ_16C8119EB5282EDF" primary="false" unique="true" type="BTREE" >
+			<column key="shop_billing_data_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="UNIQ_16C8119E77153098" name="UNIQ_16C8119E77153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+			<column key="child_of" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_16C8119E743BF776" name="IDX_16C8119E743BF776" primary="false" unique="false" type="BTREE" >
+			<column key="default_locale_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_16C8119E3101778E" name="IDX_16C8119E3101778E" primary="false" unique="false" type="BTREE" >
+			<column key="base_currency_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_16C8119EA978C17" name="IDX_16C8119EA978C17" primary="false" unique="false" type="BTREE" >
+			<column key="default_tax_zone_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_16C8119EE551C011" name="IDX_16C8119EE551C011" primary="false" unique="false" type="BTREE" >
+			<column key="hostname" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_16C8119EF242B1E6" name="IDX_16C8119EF242B1E6" primary="false" unique="false" type="BTREE" >
+			<column key="menu_taxon_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_16C8119EC064D2A5" name="IDX_16C8119EC064D2A5" primary="false" unique="false" type="BTREE" >
+			<column key="child_of" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="ChannelCountries" table="channel_countries" extends="xPDOObject">
+		<field key="channel_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="country_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="channel_id" length="" collation="A" null="false" />
+			<column key="country_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_D96E51AE72F5A1AA" name="IDX_D96E51AE72F5A1AA" primary="false" unique="false" type="BTREE" >
+			<column key="channel_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_D96E51AEF92F3E70" name="IDX_D96E51AEF92F3E70" primary="false" unique="false" type="BTREE" >
+			<column key="country_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ChannelCurrencies" table="channel_currencies" extends="xPDOObject">
+		<field key="channel_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="currency_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="channel_id" length="" collation="A" null="false" />
+			<column key="currency_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_AE491F9372F5A1AA" name="IDX_AE491F9372F5A1AA" primary="false" unique="false" type="BTREE" >
+			<column key="channel_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_AE491F9338248176" name="IDX_AE491F9338248176" primary="false" unique="false" type="BTREE" >
+			<column key="currency_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ChannelLocales" table="channel_locales" extends="xPDOObject">
+		<field key="channel_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="locale_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="channel_id" length="" collation="A" null="false" />
+			<column key="locale_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_786B7A8472F5A1AA" name="IDX_786B7A8472F5A1AA" primary="false" unique="false" type="BTREE" >
+			<column key="channel_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_786B7A84E559DFD1" name="IDX_786B7A84E559DFD1" primary="false" unique="false" type="BTREE" >
+			<column key="locale_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ChannelPricing" table="channel_pricing" extends="xPDOSimpleObject">
+		<field key="product_variant_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="price" dbtype="int" phptype="integer" null="true" />
+		<field key="channel_code" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="original_price" dbtype="int" phptype="integer" null="true" />
+
+		<index alias="product_variant_channel_idx" name="product_variant_channel_idx" primary="false" unique="true" type="BTREE" >
+			<column key="product_variant_id" length="" collation="A" null="false" />
+			<column key="channel_code" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_7801820CA80EF684" name="IDX_7801820CA80EF684" primary="false" unique="false" type="BTREE" >
+			<column key="product_variant_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="Country" table="country" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="2" phptype="string" null="false" index="unique" />
+		<field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+
+		<index alias="UNIQ_E74256BF77153098" name="UNIQ_E74256BF77153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_E74256BF77153098" name="IDX_E74256BF77153098" primary="false" unique="false" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="Currency" table="currency" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="3" phptype="string" null="false" index="unique" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="UNIQ_96EDD3D077153098" name="UNIQ_96EDD3D077153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="Customer" table="customer" extends="xPDOSimpleObject">
+		<field key="customer_group_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="default_address_id" dbtype="int" phptype="integer" null="true" index="unique" />
+		<field key="email" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="email_canonical" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="first_name" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="last_name" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="birthday" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="gender" dbtype="varchar" precision="1" phptype="string" null="false" default="u" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="phone_number" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="subscribed_to_newsletter" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+
+		<index alias="UNIQ_7E82D5E6E7927C74" name="UNIQ_7E82D5E6E7927C74" primary="false" unique="true" type="BTREE" >
+			<column key="email" length="" collation="A" null="false" />
+		</index>
+		<index alias="UNIQ_7E82D5E6A0D96FBF" name="UNIQ_7E82D5E6A0D96FBF" primary="false" unique="true" type="BTREE" >
+			<column key="email_canonical" length="" collation="A" null="false" />
+		</index>
+		<index alias="UNIQ_7E82D5E6BD94FB16" name="UNIQ_7E82D5E6BD94FB16" primary="false" unique="true" type="BTREE" >
+			<column key="default_address_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_7E82D5E6D2919A68" name="IDX_7E82D5E6D2919A68" primary="false" unique="false" type="BTREE" >
+			<column key="customer_group_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="CustomerGroup" table="customer_group" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="UNIQ_7FCF9B0577153098" name="UNIQ_7FCF9B0577153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="Entity" table="entity" extends="xPDOSimpleObject">
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" default="CURRENT_TIMESTAMP"  extra="default_generated" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="false"  extra="on update current_timestamp" />
+	</object>
+
+	
+	<object class="EntityTranslation" table="entity_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="128" phptype="string" null="false" />
+		<field key="description" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="translatable_id" name="translatable_id" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ExchangeRate" table="exchange_rate" extends="xPDOSimpleObject">
+		<field key="source_currency" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="target_currency" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="ratio" dbtype="decimal" precision="10,5" phptype="float" null="false" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="UNIQ_5F52B852A76BEEDB3FD5856" name="UNIQ_5F52B852A76BEEDB3FD5856" primary="false" unique="true" type="BTREE" >
+			<column key="source_currency" length="" collation="A" null="false" />
+			<column key="target_currency" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_5F52B852A76BEED" name="IDX_5F52B852A76BEED" primary="false" unique="false" type="BTREE" >
+			<column key="source_currency" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_5F52B85B3FD5856" name="IDX_5F52B85B3FD5856" primary="false" unique="false" type="BTREE" >
+			<column key="target_currency" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="GatewayConfig" table="gateway_config" extends="xPDOSimpleObject">
+		<field key="config" dbtype="longtext" phptype="string" null="false" />
+		<field key="gateway_name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="factory_name" dbtype="varchar" precision="255" phptype="string" null="false" />
+	</object>
+
+	
+	<object class="Locale" table="locale" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="12" phptype="string" null="false" index="unique" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="UNIQ_7BA1286477153098" name="UNIQ_7BA1286477153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="Migrations" table="migrations" extends="xPDOObject">
+		<field key="version" dbtype="varchar" precision="191" phptype="string" null="false" index="pk" />
+		<field key="executed_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="execution_time" dbtype="int" phptype="integer" null="true" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="version" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="Order" table="order" extends="xPDOSimpleObject">
+		<field key="shipping_address_id" dbtype="int" phptype="integer" null="true" index="unique" />
+		<field key="billing_address_id" dbtype="int" phptype="integer" null="true" index="unique" />
+		<field key="channel_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="promotion_coupon_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="customer_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="number" dbtype="varchar" precision="255" phptype="string" null="true" index="unique" />
+		<field key="notes" dbtype="longtext" phptype="string" null="true" />
+		<field key="state" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+		<field key="checkout_completed_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="items_total" dbtype="int" phptype="integer" null="false" />
+		<field key="adjustments_total" dbtype="int" phptype="integer" null="false" />
+		<field key="total" dbtype="int" phptype="integer" null="false" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="currency_code" dbtype="varchar" precision="3" phptype="string" null="false" />
+		<field key="locale_code" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="checkout_state" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="payment_state" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="shipping_state" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="token_value" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="customer_ip" dbtype="varchar" precision="255" phptype="string" null="true" />
+
+		<index alias="UNIQ_6196A1F996901F54" name="UNIQ_6196A1F996901F54" primary="false" unique="true" type="BTREE" >
+			<column key="number" length="" collation="A" null="true" />
+		</index>
+		<index alias="UNIQ_6196A1F94D4CFF2B" name="UNIQ_6196A1F94D4CFF2B" primary="false" unique="true" type="BTREE" >
+			<column key="shipping_address_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="UNIQ_6196A1F979D0C0E4" name="UNIQ_6196A1F979D0C0E4" primary="false" unique="true" type="BTREE" >
+			<column key="billing_address_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_6196A1F972F5A1AA" name="IDX_6196A1F972F5A1AA" primary="false" unique="false" type="BTREE" >
+			<column key="channel_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_6196A1F917B24436" name="IDX_6196A1F917B24436" primary="false" unique="false" type="BTREE" >
+			<column key="promotion_coupon_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_6196A1F99395C3F3" name="IDX_6196A1F99395C3F3" primary="false" unique="false" type="BTREE" >
+			<column key="customer_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_6196A1F9A393D2FB43625D9F" name="IDX_6196A1F9A393D2FB43625D9F" primary="false" unique="false" type="BTREE" >
+			<column key="state" length="" collation="A" null="false" />
+			<column key="updated_at" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="OrderItem" table="order_item" extends="xPDOSimpleObject">
+		<field key="order_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="variant_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="quantity" dbtype="int" phptype="integer" null="false" />
+		<field key="unit_price" dbtype="int" phptype="integer" null="false" />
+		<field key="units_total" dbtype="int" phptype="integer" null="false" />
+		<field key="adjustments_total" dbtype="int" phptype="integer" null="false" />
+		<field key="total" dbtype="int" phptype="integer" null="false" />
+		<field key="is_immutable" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="product_name" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="variant_name" dbtype="varchar" precision="255" phptype="string" null="true" />
+
+		<index alias="IDX_77B587ED8D9F6D38" name="IDX_77B587ED8D9F6D38" primary="false" unique="false" type="BTREE" >
+			<column key="order_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_77B587ED3B69A9AF" name="IDX_77B587ED3B69A9AF" primary="false" unique="false" type="BTREE" >
+			<column key="variant_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="OrderItemUnit" table="order_item_unit" extends="xPDOSimpleObject">
+		<field key="order_item_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="shipment_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="adjustments_total" dbtype="int" phptype="integer" null="false" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="IDX_82BF226EE415FB15" name="IDX_82BF226EE415FB15" primary="false" unique="false" type="BTREE" >
+			<column key="order_item_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_82BF226E7BE036FC" name="IDX_82BF226E7BE036FC" primary="false" unique="false" type="BTREE" >
+			<column key="shipment_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="OrderSequence" table="order_sequence" extends="xPDOSimpleObject">
+		<field key="idx" dbtype="int" phptype="integer" null="false" />
+		<field key="version" dbtype="int" phptype="integer" null="false" default="1" />
+	</object>
+
+	
+	<object class="Payment" table="payment" extends="xPDOSimpleObject">
+		<field key="method_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="order_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="currency_code" dbtype="varchar" precision="3" phptype="string" null="false" />
+		<field key="amount" dbtype="int" phptype="integer" null="false" />
+		<field key="state" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="details" dbtype="longtext" phptype="string" null="false" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="IDX_D9191BD419883967" name="IDX_D9191BD419883967" primary="false" unique="false" type="BTREE" >
+			<column key="method_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_D9191BD48D9F6D38" name="IDX_D9191BD48D9F6D38" primary="false" unique="false" type="BTREE" >
+			<column key="order_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="PaymentMethod" table="payment_method" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="environment" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="is_enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="position" dbtype="int" phptype="integer" null="false" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="gateway_config_id" dbtype="int" phptype="integer" null="true" index="index" />
+
+		<index alias="UNIQ_A75B0B0D77153098" name="UNIQ_A75B0B0D77153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_A75B0B0DF23D6140" name="IDX_A75B0B0DF23D6140" primary="false" unique="false" type="BTREE" >
+			<column key="gateway_config_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="PaymentMethodChannels" table="payment_method_channels" extends="xPDOObject">
+		<field key="payment_method_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="channel_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="payment_method_id" length="" collation="A" null="false" />
+			<column key="channel_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_543AC0CC5AA1164F" name="IDX_543AC0CC5AA1164F" primary="false" unique="false" type="BTREE" >
+			<column key="payment_method_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_543AC0CC72F5A1AA" name="IDX_543AC0CC72F5A1AA" primary="false" unique="false" type="BTREE" >
+			<column key="channel_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="PaymentMethodTranslation" table="payment_method_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="longtext" phptype="string" null="true" />
+		<field key="instructions" dbtype="longtext" phptype="string" null="true" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="vdx_payment_method_translation_uniq_trans" name="vdx_payment_method_translation_uniq_trans" primary="false" unique="true" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+			<column key="locale" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_966BE3A12C2AC5D3" name="IDX_966BE3A12C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="PaymentSecurityToken" table="payment_security_token" extends="xPDOObject">
+		<field key="hash" dbtype="varchar" precision="255" phptype="string" null="false" index="pk" />
+		<field key="details" dbtype="longtext" phptype="string" null="true" />
+		<field key="after_url" dbtype="longtext" phptype="string" null="true" />
+		<field key="target_url" dbtype="longtext" phptype="string" null="false" />
+		<field key="gateway_name" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="hash" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="PaypalPluginPayPalCredentials" table="paypal_plugin_pay_pal_credentials" extends="xPDOObject">
+		<field key="id" dbtype="varchar" precision="255" phptype="string" null="false" index="pk" />
+		<field key="payment_method_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="access_token" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="creation_time" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="expiration_time" dbtype="datetime" phptype="datetime" null="false" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_C56F54AD5AA1164F" name="IDX_C56F54AD5AA1164F" primary="false" unique="false" type="BTREE" >
+			<column key="payment_method_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="Product" table="product" extends="xPDOSimpleObject">
+		<field key="main_taxon_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="variant_selection_method" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="average_rating" dbtype="double" phptype="float" null="false" default="0" />
+
+		<index alias="UNIQ_677B9B7477153098" name="UNIQ_677B9B7477153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_677B9B74731E505" name="IDX_677B9B74731E505" primary="false" unique="false" type="BTREE" >
+			<column key="main_taxon_id" length="" collation="A" null="true" />
+		</index>
+
+        <composite alias="Association" class="ProductAssociation" local="id" foreign="product_id" cardinality="many" owner="local" />
+        <composite alias="AttributeValue" class="ProductAttributeValue" local="id" foreign="product_id" cardinality="many" owner="local" />
+        <composite alias="Channels" class="ProductChannels" local="id" foreign="product_id" cardinality="many" owner="local" />
+        <composite alias="Image" class="ProductImage" local="id" foreign="owner_id" cardinality="many" owner="local" />
+        <composite alias="SourceCost" class="ProductSourceCost" local="id" foreign="product_id" cardinality="many" owner="local" />
+        <composite alias="Translation" class="ProductTranslation" local="id" foreign="translatable_id" cardinality="many" owner="local" />
+	</object>
+
+	
+	<object class="ProductAssociation" table="product_association" extends="xPDOSimpleObject">
+		<field key="association_type_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="product_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="product_association_idx" name="product_association_idx" primary="false" unique="true" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+			<column key="association_type_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_48E9CDABB1E1C39" name="IDX_48E9CDABB1E1C39" primary="false" unique="false" type="BTREE" >
+			<column key="association_type_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_48E9CDAB4584665A" name="IDX_48E9CDAB4584665A" primary="false" unique="false" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+		</index>
+
+        <aggregate alias="Association" class="Product" local="product_id" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+
+	
+	<object class="ProductAssociationProduct" table="product_association_product" extends="xPDOObject">
+		<field key="association_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="product_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="association_id" length="" collation="A" null="false" />
+			<column key="product_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_A427B983EFB9C8A5" name="IDX_A427B983EFB9C8A5" primary="false" unique="false" type="BTREE" >
+			<column key="association_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_A427B9834584665A" name="IDX_A427B9834584665A" primary="false" unique="false" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductAssociationType" table="product_association_type" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="UNIQ_CCB8914C77153098" name="UNIQ_CCB8914C77153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductAssociationTypeTranslation" table="product_association_type_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="vdx_product_association_type_translation_uniq_trans" name="vdx_product_association_type_translation_uniq_trans" primary="false" unique="true" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+			<column key="locale" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_4F618E52C2AC5D3" name="IDX_4F618E52C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductAttribute" table="product_attribute" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="type" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="storage_type" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="configuration" dbtype="longtext" phptype="string" null="false" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="position" dbtype="int" phptype="integer" null="false" />
+
+		<index alias="UNIQ_BFAF484A77153098" name="UNIQ_BFAF484A77153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductAttributeTranslation" table="product_attribute_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="vdx_product_attribute_translation_uniq_trans" name="vdx_product_attribute_translation_uniq_trans" primary="false" unique="true" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+			<column key="locale" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_93850EBA2C2AC5D3" name="IDX_93850EBA2C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductAttributeValue" table="product_attribute_value" extends="xPDOSimpleObject">
+		<field key="product_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="attribute_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="text_value" dbtype="longtext" phptype="string" null="true" />
+		<field key="boolean_value" dbtype="tinyint" precision="1" phptype="integer" null="true" />
+		<field key="integer_value" dbtype="int" phptype="integer" null="true" />
+		<field key="float_value" dbtype="double" phptype="float" null="true" />
+		<field key="datetime_value" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="date_value" dbtype="date" phptype="date" null="true" />
+		<field key="json_value" dbtype="longtext" phptype="string" null="true" />
+		<field key="locale_code" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="IDX_8A053E544584665A" name="IDX_8A053E544584665A" primary="false" unique="false" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_8A053E54B6E62EFA" name="IDX_8A053E54B6E62EFA" primary="false" unique="false" type="BTREE" >
+			<column key="attribute_id" length="" collation="A" null="false" />
+		</index>
+
+        <aggregate alias="AttributeValue" class="Product" local="product_id" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+
+	
+	<object class="ProductCategory" table="product_category" extends="xPDOSimpleObject">
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" default="CURRENT_TIMESTAMP"  extra="default_generated" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true"  extra="on update current_timestamp" />
+		<field key="child_of" dbtype="int" phptype="integer" null="true" />
+	</object>
+
+	
+	<object class="ProductCategoryList" table="product_category_list" extends="xPDOSimpleObject">
+		<field key="category_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="products" dbtype="text" phptype="string" null="false" />
+		<field key="count" dbtype="int" phptype="integer" null="false" />
+
+		<index alias="vdx_product_category_list_ibfk_1" name="vdx_product_category_list_ibfk_1" primary="false" unique="false" type="BTREE" >
+			<column key="category_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductCategoryTranslation" table="product_category_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="128" phptype="string" null="false" />
+		<field key="description" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="vdx_product_category_translation_ibfk_1" name="vdx_product_category_translation_ibfk_1" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductChannels" table="product_channels" extends="xPDOObject">
+		<field key="product_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="channel_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+			<column key="channel_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_F9EF269B4584665A" name="IDX_F9EF269B4584665A" primary="false" unique="false" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_F9EF269B72F5A1AA" name="IDX_F9EF269B72F5A1AA" primary="false" unique="false" type="BTREE" >
+			<column key="channel_id" length="" collation="A" null="false" />
+		</index>
+
+        <aggregate alias="Channels" class="Product" local="product_id" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+
+	
+	<object class="ProductCollection" table="product_collection" extends="xPDOSimpleObject">
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" default="CURRENT_TIMESTAMP"  extra="default_generated" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true"  extra="on update current_timestamp" />
+		<field key="child_of" dbtype="int" phptype="integer" null="false" />
+	</object>
+
+	
+	<object class="ProductCollectionList" table="product_collection_list" extends="xPDOSimpleObject">
+		<field key="collection_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="collected_by" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="products" dbtype="text" phptype="string" null="false" />
+		<field key="count" dbtype="int" phptype="integer" null="false" />
+
+		<index alias="collection_id" name="collection_id" primary="false" unique="false" type="BTREE" >
+			<column key="collection_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductCollectionTranslation" table="product_collection_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="128" phptype="string" null="false" />
+		<field key="description" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="vdx_product_collection_translation_ibfk_1" name="vdx_product_collection_translation_ibfk_1" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductImage" table="product_image" extends="xPDOSimpleObject">
+		<field key="owner_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="type" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="path" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="IDX_88C64B2D7E3C61F9" name="IDX_88C64B2D7E3C61F9" primary="false" unique="false" type="BTREE" >
+			<column key="owner_id" length="" collation="A" null="false" />
+		</index>
+
+        <aggregate alias="Image" class="Product" local="owner_id" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+
+	
+	<object class="ProductImageProductVariants" table="product_image_product_variants" extends="xPDOObject">
+		<field key="image_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="variant_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="image_id" length="" collation="A" null="false" />
+			<column key="variant_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_8FFDAE8D3DA5256D" name="IDX_8FFDAE8D3DA5256D" primary="false" unique="false" type="BTREE" >
+			<column key="image_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_8FFDAE8D3B69A9AF" name="IDX_8FFDAE8D3B69A9AF" primary="false" unique="false" type="BTREE" >
+			<column key="variant_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductOption" table="product_option" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="position" dbtype="int" phptype="integer" null="false" />
+
+		<index alias="UNIQ_E4C0EBEF77153098" name="UNIQ_E4C0EBEF77153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductOptionTranslation" table="product_option_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="vdx_product_option_translation_uniq_trans" name="vdx_product_option_translation_uniq_trans" primary="false" unique="true" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+			<column key="locale" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_CBA491AD2C2AC5D3" name="IDX_CBA491AD2C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductOptionValue" table="product_option_value" extends="xPDOSimpleObject">
+		<field key="option_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+
+		<index alias="UNIQ_F7FF7D4B77153098" name="UNIQ_F7FF7D4B77153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_F7FF7D4BA7C41D6F" name="IDX_F7FF7D4BA7C41D6F" primary="false" unique="false" type="BTREE" >
+			<column key="option_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductOptionValueTranslation" table="product_option_value_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="value" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="vdx_product_option_value_translation_uniq_trans" name="vdx_product_option_value_translation_uniq_trans" primary="false" unique="true" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+			<column key="locale" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_8D4382DC2C2AC5D3" name="IDX_8D4382DC2C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductOptions" table="product_options" extends="xPDOObject">
+		<field key="product_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="option_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+			<column key="option_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_2B5FF0094584665A" name="IDX_2B5FF0094584665A" primary="false" unique="false" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_2B5FF009A7C41D6F" name="IDX_2B5FF009A7C41D6F" primary="false" unique="false" type="BTREE" >
+			<column key="option_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductReview" table="product_review" extends="xPDOSimpleObject">
+		<field key="product_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="author_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="title" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="rating" dbtype="int" phptype="integer" null="false" />
+		<field key="comment" dbtype="longtext" phptype="string" null="true" />
+		<field key="status" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="IDX_C7056A994584665A" name="IDX_C7056A994584665A" primary="false" unique="false" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_C7056A99F675F31B" name="IDX_C7056A99F675F31B" primary="false" unique="false" type="BTREE" >
+			<column key="author_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductSource" table="product_source" extends="xPDOSimpleObject">
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" default="CURRENT_TIMESTAMP"  extra="default_generated" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true"  extra="on update current_timestamp" />
+		<field key="type_id" dbtype="int" phptype="integer" null="false" index="index" />
+
+		<index alias="type_id" name="type_id" primary="false" unique="false" type="BTREE" >
+			<column key="type_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductSourceCost" table="product_source_cost" extends="xPDOSimpleObject">
+		<field key="source_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="product_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="cost" dbtype="int" phptype="integer" null="false" />
+		<field key="currency_id" dbtype="int" phptype="integer" null="false" index="index" />
+
+		<index alias="vdx_product_source_cost_currency_idx" name="vdx_product_source_cost_currency_idx" primary="false" unique="true" type="BTREE" >
+			<column key="currency_id" length="" collation="A" null="false" />
+			<column key="source_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_9231DCA2C2AC5D3" name="IDX_9231DCA2C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="source_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="vdx_product_source_cost_product_idx" name="vdx_product_source_cost_product_idx" primary="false" unique="false" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+		</index>
+
+        <aggregate alias="SourceCost" class="Product" local="product_id" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+
+	
+	<object class="ProductSourceTranslation" table="product_source_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="128" phptype="string" null="false" />
+		<field key="description" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+
+		<index alias="vdx_product_source_translation_uniq_trans" name="vdx_product_source_translation_uniq_trans" primary="false" unique="true" type="BTREE" >
+			<column key="locale" length="" collation="A" null="false" />
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_901FZ7B82C2AC5D3" name="IDX_901FZ7B82C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductSourceType" table="product_source_type" extends="xPDOSimpleObject">
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" default="CURRENT_TIMESTAMP"  extra="default_generated" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true"  extra="on update current_timestamp" />
+	</object>
+
+	
+	<object class="ProductSourceTypeTranslation" table="product_source_type_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="128" phptype="string" null="false" />
+		<field key="description" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+
+		<index alias="vdx_product_source_type_translation_uniq_trans" name="vdx_product_source_type_translation_uniq_trans" primary="false" unique="true" type="BTREE" >
+			<column key="locale" length="" collation="A" null="false" />
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_999C3A5D2C2AC5D3" name="IDX_999C3A5D2C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductTags" table="product_tags" extends="xPDOSimpleObject">
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" default="CURRENT_TIMESTAMP"  extra="default_generated" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true"  extra="on update current_timestamp" />
+		<field key="product_id" dbtype="int" phptype="integer" null="false" index="unique" />
+
+		<index alias="product_id" name="product_id" primary="false" unique="true" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductTagsTranslation" table="product_tags_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="tags" dbtype="text" phptype="string" null="false" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="translatable_id" name="translatable_id" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductTaxon" table="product_taxon" extends="xPDOSimpleObject">
+		<field key="product_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="taxon_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="position" dbtype="int" phptype="integer" null="false" />
+
+		<index alias="product_taxon_idx" name="product_taxon_idx" primary="false" unique="true" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+			<column key="taxon_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_169C6CD94584665A" name="IDX_169C6CD94584665A" primary="false" unique="false" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_169C6CD9DE13F470" name="IDX_169C6CD9DE13F470" primary="false" unique="false" type="BTREE" >
+			<column key="taxon_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductTranslation" table="product_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="slug" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="longtext" phptype="string" null="true" />
+		<field key="meta_keywords" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="meta_description" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="short_description" dbtype="longtext" phptype="string" null="true" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+
+		<index alias="vdx_product_translation_uniq_trans" name="vdx_product_translation_uniq_trans" primary="false" unique="true" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+			<column key="locale" length="" collation="A" null="false" />
+		</index>
+		<index alias="UNIQ_105A9084180C698989D9B62" name="UNIQ_105A9084180C698989D9B62" primary="false" unique="true" type="BTREE" >
+			<column key="locale" length="" collation="A" null="false" />
+			<column key="slug" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_105A9082C2AC5D3" name="IDX_105A9082C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+
+        <aggregate alias="Translation" class="Product" local="translatable_id" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+
+	
+	<object class="ProductType" table="product_type" extends="xPDOSimpleObject">
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" default="CURRENT_TIMESTAMP"  extra="default_generated" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true"  extra="on update current_timestamp" />
+	</object>
+
+	
+	<object class="ProductTypeTranslation" table="product_type_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="128" phptype="string" null="false" />
+		<field key="description" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+
+		<index alias="UNIQ_914BKE6SDBN4" name="UNIQ_914BKE6SDBN4" primary="false" unique="true" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+			<column key="locale" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_920BSG47GAC2C" name="IDX_920BSG47GAC2C" primary="false" unique="false" type="BTREE" >
+			<column key="locale" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_919BSG47GAC2C" name="IDX_919BSG47GAC2C" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductVariant" table="product_variant" extends="xPDOSimpleObject">
+		<field key="product_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="tax_category_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="shipping_category_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="on_hold" dbtype="int" phptype="integer" null="false" />
+		<field key="on_hand" dbtype="int" phptype="integer" null="false" />
+		<field key="tracked" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="width" dbtype="double" phptype="float" null="true" />
+		<field key="height" dbtype="double" phptype="float" null="true" />
+		<field key="depth" dbtype="double" phptype="float" null="true" />
+		<field key="weight" dbtype="double" phptype="float" null="true" />
+		<field key="position" dbtype="int" phptype="integer" null="false" />
+		<field key="shipping_required" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="version" dbtype="int" phptype="integer" null="false" default="1" />
+		<field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+
+		<index alias="UNIQ_A29B52377153098" name="UNIQ_A29B52377153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_A29B5234584665A" name="IDX_A29B5234584665A" primary="false" unique="false" type="BTREE" >
+			<column key="product_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_A29B5239DF894ED" name="IDX_A29B5239DF894ED" primary="false" unique="false" type="BTREE" >
+			<column key="tax_category_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_A29B5239E2D1A41" name="IDX_A29B5239E2D1A41" primary="false" unique="false" type="BTREE" >
+			<column key="shipping_category_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="ProductVariantOptionValue" table="product_variant_option_value" extends="xPDOObject">
+		<field key="variant_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="option_value_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="variant_id" length="" collation="A" null="false" />
+			<column key="option_value_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_76CDAFA13B69A9AF" name="IDX_76CDAFA13B69A9AF" primary="false" unique="false" type="BTREE" >
+			<column key="variant_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_76CDAFA1D957CA06" name="IDX_76CDAFA1D957CA06" primary="false" unique="false" type="BTREE" >
+			<column key="option_value_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ProductVariantTranslation" table="product_variant_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="vdx_product_variant_translation_uniq_trans" name="vdx_product_variant_translation_uniq_trans" primary="false" unique="true" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+			<column key="locale" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_8DC18EDC2C2AC5D3" name="IDX_8DC18EDC2C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="Promotion" table="promotion" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="priority" dbtype="int" phptype="integer" null="false" />
+		<field key="exclusive" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="usage_limit" dbtype="int" phptype="integer" null="true" />
+		<field key="used" dbtype="int" phptype="integer" null="false" />
+		<field key="coupon_based" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="starts_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="ends_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="UNIQ_F157396377153098" name="UNIQ_F157396377153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="PromotionAction" table="promotion_action" extends="xPDOSimpleObject">
+		<field key="promotion_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="type" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="configuration" dbtype="longtext" phptype="string" null="false" />
+
+		<index alias="IDX_933D0915139DF194" name="IDX_933D0915139DF194" primary="false" unique="false" type="BTREE" >
+			<column key="promotion_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="PromotionChannels" table="promotion_channels" extends="xPDOObject">
+		<field key="promotion_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="channel_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="promotion_id" length="" collation="A" null="false" />
+			<column key="channel_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_1A044F64139DF194" name="IDX_1A044F64139DF194" primary="false" unique="false" type="BTREE" >
+			<column key="promotion_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_1A044F6472F5A1AA" name="IDX_1A044F6472F5A1AA" primary="false" unique="false" type="BTREE" >
+			<column key="channel_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="PromotionCoupon" table="promotion_coupon" extends="xPDOSimpleObject">
+		<field key="promotion_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="usage_limit" dbtype="int" phptype="integer" null="true" />
+		<field key="used" dbtype="int" phptype="integer" null="false" />
+		<field key="expires_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="per_customer_usage_limit" dbtype="int" phptype="integer" null="true" />
+		<field key="reusable_from_cancelled_orders" dbtype="tinyint" precision="1" phptype="integer" null="false" default="1" />
+
+		<index alias="UNIQ_B04EBA8577153098" name="UNIQ_B04EBA8577153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_B04EBA85139DF194" name="IDX_B04EBA85139DF194" primary="false" unique="false" type="BTREE" >
+			<column key="promotion_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="PromotionOrder" table="promotion_order" extends="xPDOObject">
+		<field key="order_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="promotion_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="order_id" length="" collation="A" null="false" />
+			<column key="promotion_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_BF9CF6FB8D9F6D38" name="IDX_BF9CF6FB8D9F6D38" primary="false" unique="false" type="BTREE" >
+			<column key="order_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_BF9CF6FB139DF194" name="IDX_BF9CF6FB139DF194" primary="false" unique="false" type="BTREE" >
+			<column key="promotion_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="PromotionRule" table="promotion_rule" extends="xPDOSimpleObject">
+		<field key="promotion_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="type" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="configuration" dbtype="longtext" phptype="string" null="false" />
+
+		<index alias="IDX_2C188EA8139DF194" name="IDX_2C188EA8139DF194" primary="false" unique="false" type="BTREE" >
+			<column key="promotion_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="Province" table="province" extends="xPDOSimpleObject">
+		<field key="country_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="abbreviation" dbtype="varchar" precision="255" phptype="string" null="true" />
+
+		<index alias="UNIQ_B5618FE477153098" name="UNIQ_B5618FE477153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+		<index alias="UNIQ_B5618FE4F92F3E705E237E06" name="UNIQ_B5618FE4F92F3E705E237E06" primary="false" unique="true" type="BTREE" >
+			<column key="country_id" length="" collation="A" null="false" />
+			<column key="name" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_B5618FE4F92F3E70" name="IDX_B5618FE4F92F3E70" primary="false" unique="false" type="BTREE" >
+			<column key="country_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="Shipment" table="shipment" extends="xPDOSimpleObject">
+		<field key="method_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="order_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="state" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="tracking" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="shipped_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="IDX_FD707B3319883967" name="IDX_FD707B3319883967" primary="false" unique="false" type="BTREE" >
+			<column key="method_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_FD707B338D9F6D38" name="IDX_FD707B338D9F6D38" primary="false" unique="false" type="BTREE" >
+			<column key="order_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ShippingCategory" table="shipping_category" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="longtext" phptype="string" null="true" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="UNIQ_B1D6465277153098" name="UNIQ_B1D6465277153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ShippingMethod" table="shipping_method" extends="xPDOSimpleObject">
+		<field key="category_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="zone_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="tax_category_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="configuration" dbtype="longtext" phptype="string" null="false" />
+		<field key="category_requirement" dbtype="int" phptype="integer" null="false" />
+		<field key="calculator" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="is_enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="position" dbtype="int" phptype="integer" null="false" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="archived_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="UNIQ_5FB0EE1177153098" name="UNIQ_5FB0EE1177153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_5FB0EE1112469DE2" name="IDX_5FB0EE1112469DE2" primary="false" unique="false" type="BTREE" >
+			<column key="category_id" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_5FB0EE119F2C3FAB" name="IDX_5FB0EE119F2C3FAB" primary="false" unique="false" type="BTREE" >
+			<column key="zone_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_5FB0EE119DF894ED" name="IDX_5FB0EE119DF894ED" primary="false" unique="false" type="BTREE" >
+			<column key="tax_category_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="ShippingMethodChannels" table="shipping_method_channels" extends="xPDOObject">
+		<field key="shipping_method_id" dbtype="int" phptype="integer" null="false" index="pk" />
+		<field key="channel_id" dbtype="int" phptype="integer" null="false" index="pk" />
+
+		<index alias="PRIMARY" name="PRIMARY" primary="true" unique="true" type="BTREE" >
+			<column key="shipping_method_id" length="" collation="A" null="false" />
+			<column key="channel_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_2D9833355F7D6850" name="IDX_2D9833355F7D6850" primary="false" unique="false" type="BTREE" >
+			<column key="shipping_method_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_2D98333572F5A1AA" name="IDX_2D98333572F5A1AA" primary="false" unique="false" type="BTREE" >
+			<column key="channel_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ShippingMethodRule" table="shipping_method_rule" extends="xPDOSimpleObject">
+		<field key="shipping_method_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="type" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="configuration" dbtype="longtext" phptype="string" null="false" />
+
+		<index alias="IDX_88A0EB655F7D6850" name="IDX_88A0EB655F7D6850" primary="false" unique="false" type="BTREE" >
+			<column key="shipping_method_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="ShippingMethodTranslation" table="shipping_method_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="vdx_shipping_method_translation_uniq_trans" name="vdx_shipping_method_translation_uniq_trans" primary="false" unique="true" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+			<column key="locale" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_2B37DB3D2C2AC5D3" name="IDX_2B37DB3D2C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ShopBillingData" table="shop_billing_data" extends="xPDOSimpleObject">
+		<field key="company" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="tax_id" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="country_code" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="street" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="city" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="postcode" dbtype="varchar" precision="255" phptype="string" null="true" />
+	</object>
+
+	
+	<object class="ShopUser" table="shop_user" extends="xPDOSimpleObject">
+		<field key="customer_id" dbtype="int" phptype="integer" null="false" index="unique" />
+		<field key="username" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="username_canonical" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="salt" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="password" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="last_login" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="password_reset_token" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="password_requested_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="email_verification_token" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="verified_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="locked" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="expires_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="credentials_expire_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="roles" dbtype="longtext" phptype="string" null="false" />
+		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="email_canonical" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="encoder_name" dbtype="varchar" precision="255" phptype="string" null="true" />
+
+		<index alias="UNIQ_7C2B74809395C3F3" name="UNIQ_7C2B74809395C3F3" primary="false" unique="true" type="BTREE" >
+			<column key="customer_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="TaxCategory" table="tax_category" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="longtext" phptype="string" null="true" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="UNIQ_221EB0BE77153098" name="UNIQ_221EB0BE77153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="TaxRate" table="tax_rate" extends="xPDOSimpleObject">
+		<field key="category_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="zone_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="amount" dbtype="decimal" precision="10,5" phptype="float" null="false" />
+		<field key="included_in_price" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="calculator" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+
+		<index alias="UNIQ_3CD86B2E77153098" name="UNIQ_3CD86B2E77153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_3CD86B2E12469DE2" name="IDX_3CD86B2E12469DE2" primary="false" unique="false" type="BTREE" >
+			<column key="category_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_3CD86B2E9F2C3FAB" name="IDX_3CD86B2E9F2C3FAB" primary="false" unique="false" type="BTREE" >
+			<column key="zone_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="Taxon" table="taxon" extends="xPDOSimpleObject">
+		<field key="tree_root" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="parent_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="tree_left" dbtype="int" phptype="integer" null="false" />
+		<field key="tree_right" dbtype="int" phptype="integer" null="false" />
+		<field key="tree_level" dbtype="int" phptype="integer" null="false" />
+		<field key="position" dbtype="int" phptype="integer" null="false" />
+		<field key="created_at" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="updated_at" dbtype="datetime" phptype="datetime" null="true" />
+		<field key="enabled" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+
+		<index alias="UNIQ_CFD811CA77153098" name="UNIQ_CFD811CA77153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_CFD811CAA977936C" name="IDX_CFD811CAA977936C" primary="false" unique="false" type="BTREE" >
+			<column key="tree_root" length="" collation="A" null="true" />
+		</index>
+		<index alias="IDX_CFD811CA727ACA70" name="IDX_CFD811CA727ACA70" primary="false" unique="false" type="BTREE" >
+			<column key="parent_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="TaxonImage" table="taxon_image" extends="xPDOSimpleObject">
+		<field key="owner_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="type" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="path" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="IDX_DBE52B287E3C61F9" name="IDX_DBE52B287E3C61F9" primary="false" unique="false" type="BTREE" >
+			<column key="owner_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="TaxonTranslation" table="taxon_translation" extends="xPDOSimpleObject">
+		<field key="translatable_id" dbtype="int" phptype="integer" null="false" index="index" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="slug" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="longtext" phptype="string" null="true" />
+		<field key="locale" dbtype="varchar" precision="255" phptype="string" null="false" index="index" />
+
+		<index alias="slug_uidx" name="slug_uidx" primary="false" unique="true" type="BTREE" >
+			<column key="locale" length="" collation="A" null="false" />
+			<column key="slug" length="" collation="A" null="false" />
+		</index>
+		<index alias="vdx_taxon_translation_uniq_trans" name="vdx_taxon_translation_uniq_trans" primary="false" unique="true" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+			<column key="locale" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_1487DFCF2C2AC5D3" name="IDX_1487DFCF2C2AC5D3" primary="false" unique="false" type="BTREE" >
+			<column key="translatable_id" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="UserOauth" table="user_oauth" extends="xPDOSimpleObject">
+		<field key="user_id" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="provider" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="identifier" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="access_token" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="refresh_token" dbtype="varchar" precision="255" phptype="string" null="true" />
+
+		<index alias="user_provider" name="user_provider" primary="false" unique="true" type="BTREE" >
+			<column key="user_id" length="" collation="A" null="true" />
+			<column key="provider" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_C3471B78A76ED395" name="IDX_C3471B78A76ED395" primary="false" unique="false" type="BTREE" >
+			<column key="user_id" length="" collation="A" null="true" />
+		</index>
+	</object>
+
+	
+	<object class="Zone" table="zone" extends="xPDOSimpleObject">
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" index="unique" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="type" dbtype="varchar" precision="8" phptype="string" null="false" />
+		<field key="scope" dbtype="varchar" precision="255" phptype="string" null="true" />
+
+		<index alias="UNIQ_7BE2258E77153098" name="UNIQ_7BE2258E77153098" primary="false" unique="true" type="BTREE" >
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	
+	<object class="ZoneMember" table="zone_member" extends="xPDOSimpleObject">
+		<field key="belongs_to" dbtype="int" phptype="integer" null="true" index="index" />
+		<field key="code" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+		<index alias="UNIQ_E8B5ABF34B0E929B77153098" name="UNIQ_E8B5ABF34B0E929B77153098" primary="false" unique="true" type="BTREE" >
+			<column key="belongs_to" length="" collation="A" null="true" />
+			<column key="code" length="" collation="A" null="false" />
+		</index>
+		<index alias="IDX_E8B5ABF34B0E929B" name="IDX_E8B5ABF34B0E929B" primary="false" unique="false" type="BTREE" >
+			<column key="belongs_to" length="" collation="A" null="true" />
+		</index>
+	</object>
+</model>
